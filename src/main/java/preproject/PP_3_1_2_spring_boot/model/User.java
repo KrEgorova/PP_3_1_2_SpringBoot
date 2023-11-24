@@ -13,7 +13,7 @@ import jakarta.validation.constraints.Max;
 
 
 @Entity
-@Table(name = "userss")
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
