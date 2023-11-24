@@ -14,41 +14,39 @@
             <th> Name</th>
             <th> Age</th>
             <th> City</th>
-            <th> Update</th>
+            <th> Edit</th>
             <th> Delete</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:if="${users.size() == 0}">
-            <td colspan="2"> No users</td>
-        </tr>
         <tr th:each="user : ${users}">
-            <form th:method="POST" th:action="@{/users/update}" th:object="${user}">
-                <td><input type="text" th:value="${user.getId()}" style="background-color:#FDBDBA" id="id" name="id"
-                           readonly/></td>
-                <td><input type="text" th:value="${user.getName()}" id="name" name="name"/></td>
-                <td><input type="text" th:value="${user.getAge()}" id="age" name="age"/></td>
-                <td><input type="text" th:value="${user.getCity()}" id="city" name="city"/></td>
-                <td><input type="submit" value="Update"></td>
-                <td><span>
-                <a type="submit" th:href="@{/users/remove(id=${user.getId()})}">Delete</a>
-            </span></td>
-            </form>
+            <td th:text="${user.getId()}" id="id"></td>
+            <td th:text="${user.getName()}" id="userName"></td>
+            <td th:text="${user.getAge()}" id="userAge"></td>
+            <td th:text="${user.getCity()}" id="userCity"></td>
+            <td><a type="submit" th:href="@{/users/page-edit(id=${user.getId()})}">Edit</a></td>
+            <td><a type="submit" th:href="@{/users/page-delete(id=${user.getId()})}">Delete</a></td>
         </tr>
         </tbody>
     </table>
 </div>
-<form th:method="POST" th:action="@{/users}" th:object="${user}">
-    <label for="name">Enter name:</label>
-    <input type="text" th:field="*{name}" id="name1"/>
-    <br>
-    <label for="age">Enter age:</label>
-    <input type="number" th:field="*{age}" id="age1"/>
-    <br>
-    <label for="city">Enter city:</label>
-    <input type="text" th:field="*{city}" id="city3"/>
-    <br>
-    <input type="submit" value="Create!">
-</form>
+<div>
+    <form th:method="POST" th:action="@{/users}" th:object="${user}">
+        <label for="name">Enter name:</label>
+        <input type="text" th:field="*{name}" id="name"/>
+        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color:#FF0000">Name error</div>
+        <br>
+        <label for="age">Enter age:</label>
+        <input type="number" th:field="*{age}" id="age"/>
+        <div th:if="${#fields.hasErrors('age')}" th:errors="*{age}" style="color:#FF0000">Age error</div>
+        <br>
+        <label for="city">Enter city:</label>
+        <input type="text" th:field="*{city}" id="city"/>
+        <div th:if="${#fields.hasErrors('city')}" th:errors="*{city}" style="color:#FF0000">City error</div>
+        <br>
+        <input type="submit" value="Create!">
+    </form>
+</div>
+
 </body>
 </html>

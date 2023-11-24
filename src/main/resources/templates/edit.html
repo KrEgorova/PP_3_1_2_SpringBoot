@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit user</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/users/edit}" th:object="${user}">
+    <label for="id">ID:</label>
+    <input type="text" th:value="${user.getId()}" style="background-color:#A9A9A9" id="id" name="id"
+           readonly/>
+    <br>
+    <label for="name">Enter name:</label>
+    <input type="text" th:value="${user.getName()}" id="name" name="name"/>
+    <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color:#FF0000">Name error</div>
+    <br>
+    <label for="age">Enter age:</label>
+    <input type="text" th:value="${user.getAge()}" id="age" name="age"/>
+    <div th:if="${#fields.hasErrors('age')}" th:errors="*{age}" style="color:#FF0000">Age error</div>
+    <br>
+    <label for="city">Enter city:</label>
+    <input type="text" th:value="${user.getCity()}" id="city" name="city"/>
+    <div th:if="${#fields.hasErrors('city')}" th:errors="*{city}" style="color:#FF0000">City error</div>
+    <br>
+    <input type="submit" value="Update">
+</form>
+</body>
+</html>

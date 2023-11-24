@@ -2,9 +2,9 @@ package preproject.PP_3_1_2_spring_boot.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import preproject.PP_3_1_2_spring_boot.dao.UserDao;
-import preproject.PP_3_1_2_spring_boot.models.User;
-
+import preproject.PP_3_1_2_spring_boot.model.User;
 
 import java.util.List;
 
@@ -24,17 +24,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void saveUser(User user) {
         userDao.saveUser(user);
     }
 
     @Override
-    public void removeUser(long id) {
-        userDao.removeUser(id);
+    @Transactional
+    public void deleteUser(long id) {
+        userDao.deleteUser(id);
     }
 
     @Override
-    public void updateUser(User user) {
-        userDao.updateUser(user);
+    @Transactional
+    public void editUser(User user) {
+        userDao.editUser(user);
     }
+
+    @Override
+    public User showUserById(long id) {
+        return userDao.showUserById(id);
+    }
+
+
 }

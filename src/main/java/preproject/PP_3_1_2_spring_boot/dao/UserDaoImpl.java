@@ -4,7 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import preproject.PP_3_1_2_spring_boot.models.User;
+import preproject.PP_3_1_2_spring_boot.model.User;
 
 import java.util.Comparator;
 import java.util.List;
@@ -24,21 +24,28 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    @Transactional
     public void saveUser(User user) {
         entityManager.persist(user);
     }
 
     @Override
-    @Transactional
-    public void removeUser(long id) {
-        User user = entityManager.find(User.class, id);
+    public void deleteUser(long id) {
+        User user = showUserById(id);
         entityManager.remove(user);
     }
 
     @Override
-    @Transactional
-    public void updateUser(User user) {
+    public void editUser(User user) {
         entityManager.merge(user);
+    }
+
+    @Override
+    public User showUserById(long id) {
+        User user = entityManager.find(User.class, id);
+        if (user != null) {
+            return user;
+        } else {
+            throw new NullPointerException("Пользователя с таким ID не существует!!!!!");
+        }
     }
 }

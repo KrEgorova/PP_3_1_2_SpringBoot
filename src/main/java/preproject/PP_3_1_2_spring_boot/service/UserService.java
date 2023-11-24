@@ -1,7 +1,7 @@
 package preproject.PP_3_1_2_spring_boot.service;
 
 import org.springframework.stereotype.Service;
-import preproject.PP_3_1_2_spring_boot.models.User;
+import preproject.PP_3_1_2_spring_boot.model.User;
 
 import java.util.List;
 
@@ -12,7 +12,9 @@ public interface UserService {
 
     void saveUser(User user);
 
-    void removeUser(long id);
+    void deleteUser(long id);
 
-    void updateUser(User user);
+    void editUser(User user);
+
+    User showUserById(long id);
 }
